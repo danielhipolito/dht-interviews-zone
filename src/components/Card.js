@@ -5,7 +5,7 @@ const Card = props => {
     const StyledCard = styled.div.attrs(props =>  {return {className: props.className}})`
       height: ${props.size}vh;
       `;
-    return <StyledCard className = {`w-100 ${props.customClass}`} >
+    return <StyledCard className = {`${props.customClass}`} >
         {props.children}
     </StyledCard>
     

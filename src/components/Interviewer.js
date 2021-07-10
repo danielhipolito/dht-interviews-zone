@@ -1,9 +1,11 @@
-import NavBar from './NavBar';
+import styled from 'styled-components';
+import Card from './Card';
+import ChatHeader from './ChatHeader';
 
-const Interviewer = props => {
-    return <div className = "container-fluid">
-        <NavBar/>
-    </div>;
+const Interviewer = () => {
+    return <div className = "">
+        <ChatHeader/>
+    </div>
 };
 
 export default Interviewer;
