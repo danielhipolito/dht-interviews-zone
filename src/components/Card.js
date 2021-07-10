@@ -5,7 +5,8 @@ const Card = props => {
     const StyledCard = styled.div.attrs(props =>  {return {className: props.className}})`
         height: ${props.size}vh;
         overflow-y: auto;
-        overflow-x: hidden !important;  
+        overflow-x: hidden !important; 
+        border-radius:15px; 
         scrollbar-color:  #F93F83;
         @media (max-width: 992px) {
             height: 100%;

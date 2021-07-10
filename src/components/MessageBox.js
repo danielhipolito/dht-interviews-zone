@@ -47,7 +47,7 @@ const MessageBox = props => {
         }
     `;
 
-    return <div className = "row mt-2 ">
+    return <div className = "row mt-2">
         <div className = "col-md-2 col-3 d-flex justify-content-center">
             <StyledImgContainer>
                 <StyledIndicator className ="rounded-circle bg-secondary text-info text-center">
@@ -57,7 +57,7 @@ const MessageBox = props => {
             </StyledImgContainer>
         </div>
         <div className = "col-md-10 col-9">
-            <div className = "row ">
+            <div className = "row">
                 <div className = "col-lg-12">
                     <h5> {props.title} </h5>
                     {/* <h5>¿Cual es tu nombre ?</h5> */}
