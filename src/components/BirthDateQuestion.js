@@ -42,7 +42,6 @@ const BirthDateQuestion = props => {
                 props.onSendName(birthDate);
             }
         }
-
     };
     
     return <MessageBox onSubmit = {validateDate} 
@@ -54,7 +53,7 @@ const BirthDateQuestion = props => {
                         onChange = {handleBirthDate} name = "day" value = {birthDate.day} min = {dayMin}
                         ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl])} max = {dayMax}/>    
                 </div>
-                <div className = "col-md-4 mb-2">
+                <div className = "col-md-4">
                     <select id="month" className="form-control" name="month" value = {birthDate.month}
                         onChange = {handleBirthDate} value = {birthDate.month}>
                         {months.map((month,idx) =><option value = {idx + 1 } key = {idx}>{month}</option>)}
