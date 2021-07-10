@@ -10,7 +10,7 @@ const InterviewsZone = () => {
     //   `;
     return <div className = "container-fluid">
         <NavBar/>
-        <Card customClass = "bg-info container p-md-1" size = {83}>
+        <Card customClass = "bg-info container p-md-1 p-0" size = "83">
             <Interviewer/>
         </Card>
     </div>;
