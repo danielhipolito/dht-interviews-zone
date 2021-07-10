@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 const MessageBox = props => {
     const StyledImg = styled.img.attrs(props =>  {return {className: props.className}})`
         height: 100%;
+        background-size:100%;
         width: 100%;
-        content: url("https://i.pinimg.com/originals/4e/b3/f7/4eb3f7fe5216576fbc26ec189139211a.jpg"); 
+        background-image: url("https://i.pinimg.com/originals/4e/b3/f7/4eb3f7fe5216576fbc26ec189139211a.jpg"); 
     `;
 
     const StyledIndicator = styled.div.attrs(props =>  {return {className: props.className}})`
@@ -57,7 +58,7 @@ const MessageBox = props => {
         <div className = "col-md-10 col-9">
             <div className = "row">
                 <div className = "col-lg-12">
-                    {props.title}
+                    <h5> {props.title} </h5>
                     {/* <h5>¿Cual es tu nombre ?</h5> */}
                 </div>
                 <div className = "col-lg-12  ">
@@ -65,22 +66,7 @@ const MessageBox = props => {
                         <div className = "col-md-10">
                             <Card customClass = "bg-light">
                                 {props.children}
-                                {/* <div className = "row mb-3">
-                                    <div className = "col-lg-6">
-                                        hola mundo
-                                    </div>
-                                    <div className = "col-lg-6">
-                                        adios mundo
-                                    </div>
-                                </div>
-                                <div className = "row">
-                                    <div className = "col-lg-6">
-                                        hola mundo
-                                    </div>
-                                    <div className = "col-lg-6">
-                                        adios mundo
-                                    </div>
-                                </div> */}
+                            
                             </Card>
                         </div>
                         <div className = {`col-md-2 d-flex align-items-center justify-content-md-center 
@@ -96,7 +82,7 @@ const MessageBox = props => {
     </div>          
 };
 MessageBox.defaultProps = {
-    title: '¿Cual es tu nombre',
+    title: '¿Cual es tu nombre?',
     onSubmit: () => alert("¿Que se supone que tendría que hacer?"),
     children: <input type = "text" placeholder = "Tu respuesta aqui"/>  
 };
