@@ -3,14 +3,14 @@ import {useState, useRef, useEffect} from 'react';
 
 const NameQuestion = props => {
     const [candidateName,setCandidateName] = useState({});
-    const [edited,setEdited] = useState("");
+    const [answeredQuestion,setAnsweredQuestion] = useState("");
     const itemEls = useRef([]);
 
     useEffect(()=>{
-        if(edited) {
+        if(answeredQuestion) {
             itemEls.current.forEach(itemEl=> {
                 if(itemEl) {
-                    if(itemEl.id.includes(edited))
+                    if(itemEl.id.includes(answeredQuestion))
                         itemEl.focus();
                 }              
             });
@@ -18,7 +18,7 @@ const NameQuestion = props => {
     },[candidateName]);
 
     const handleCandidateName = e => {
-        setEdited(e.target.id);
+        setAnsweredQuestion(e.target.id);
         setCandidateName({...candidateName,[e.target.name]:e.target.value});
     };
     
@@ -26,24 +26,28 @@ const NameQuestion = props => {
         <form>
             <div className = "row p-3">
                 <div className = "col-md-6">
-                    <input placeholder = "Primer Nombre" className = "form-control"  id="firstName" type = "text"
-                        onChange = {handleCandidateName} name = "firstName" value = {candidateName.firstName}
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }/>    
+                    <input placeholder = "Primer Nombre" className = "form-control"  id="firstName" 
+                        type = "text" onChange = {handleCandidateName} name = "firstName" 
+                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
+                        value = {candidateName.firstName}/>    
                 </div>
                 <div className = "col-md-6 mb-2">
                     <input placeholder = "Segundo Nombre" className = "form-control" id="secondName"
-                    onChange = {handleCandidateName} name = "secondName" value = {candidateName.secondName}
-                    ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }/>
+                        type = "text" onChange = {handleCandidateName} name = "secondName"
+                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
+                        value = {candidateName.secondName}/>
                 </div>
                 <div className = "col-md-6">
-                    <input placeholder = "Apellido Paterno" className = "form-control" id = "fathersLastName"
-                    onChange = {handleCandidateName} name = "fathersLastName" value = {candidateName.fathersLastName}
-                    ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }/>
+                    <input placeholder = "Apellido Paterno" className = "form-control" type = "text"
+                        id = "fathersLastName" onChange = {handleCandidateName} name = "fathersLastName"
+                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
+                        value = {candidateName.fathersLastName}/>
                 </div>
                 <div className = "col-md-6">
-                    <input placeholder = "Apellido Materno" className = "form-control" id = "mothersLastName"
-                    onChange = {handleCandidateName} name = "mothersLastName" value = {candidateName.mothersLastName}
-                    ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }/>
+                    <input placeholder = "Apellido Materno" className = "form-control" type = "text"
+                        id = "mothersLastName" onChange = {handleCandidateName} name = "mothersLastName" 
+                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
+                        value = {candidateName.mothersLastName}/>
                 </div>
             </div>
         </form>
