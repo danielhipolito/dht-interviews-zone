@@ -1,17 +1,12 @@
 import { Switch, Route } from 'react-router-dom';
-
-import Initial from "../components/Initial";
+import Interviewer from "../components/Interviewer";
 
 const RootRouters = ()=> {
-
-    return(
-        <div>
-            <Switch>
-                <Route path="/" component={Initial}/>
-            </Switch>
-        </div>
-    );
-
+    return  <div>
+        <Switch>
+            <Route path="/" component = {Interviewer}/>
+        </Switch>
+    </div>;
 };
 
 export default RootRouters;
