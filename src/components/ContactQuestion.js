@@ -3,6 +3,7 @@ import {useState, useRef, useEffect} from 'react';
 import 'moment/locale/es';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import PropTypes from 'prop-types';
 
 const ContactQuestion = props => {
     const [contactData,setContactData] = useState({});
@@ -52,7 +53,7 @@ const ContactQuestion = props => {
                     <input placeholder = "Correo electrónico" className = "form-control" type = "email"
                         id = "email" onChange = {handleContactData} name = "email"
                         ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
-                        value = {contactData.email}/>
+                        value = {contactData.email} disabled = {props.isAnswered}/>
                 </div>
                 <div className = "col-md-6">
                     <PhoneInput
@@ -69,11 +70,22 @@ const ContactQuestion = props => {
                             }}
                         preferredCountries = {["us","mx","pt"]}
                         required
+                        disabled = {props.isAnswered}
                     />
                 </div>
             </div>
         </form>
     </MessageBox>;
+};
+
+ContactQuestion.defaultProps = {
+    isAnswered: false,
+    onSendName: () => alert("No tengo función establecida")
+};
+
+ContactQuestion.propTypes = {
+    isAnswered: PropTypes.bool,
+    onSendName: PropTypes.func.isRequired
 };
 
 export default ContactQuestion;
