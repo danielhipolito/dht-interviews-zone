@@ -6,16 +6,17 @@ const MessageBox = props => {
     const StyledImg = styled.img.attrs(props =>  {return {className: props.className}})`
         height: 100%;
         background-size:100%;
+        background-position:center;
         width: 100%;
         background-image: url("https://i.pinimg.com/originals/4e/b3/f7/4eb3f7fe5216576fbc26ec189139211a.jpg"); 
     `;
 
     const StyledIndicator = styled.div.attrs(props =>  {return {className: props.className}})`
-        height: 1.3rem;
-        width: 1.3rem;
+        height: 1.2rem;
+        width: 1.2rem;
         position: absolute;
-        bottom: 13px;
-        right: 14px;
+        bottom: 11px;
+        right: 13px;
         @media (max-width: 992px) {
             font-size:13px;
             height: 1.1rem;
@@ -25,28 +26,28 @@ const MessageBox = props => {
         }
         @media (max-width: 768px) {
             font-size:12px;
-            height: 0.75rem;
-            width: 0.75rem;
-            bottom: 7.5px;
-            right: 8px;
+            height: 1rem;
+            width: 0.9rem;
+            bottom: 9px;
+            right: 7px;
         }
     `;
 
     const StyledImgContainer = styled.div.attrs(props =>  {return {className: props.className}})`
         position: relative;
-        height: 10rem;
-        width: 7.5rem;
+        height: 9rem;
+        width: 7rem;
         @media (max-width: 992px) {
             height: 8rem;
             width: 6rem;
         }
         @media (max-width: 768px) {
-            height: 4rem;
-            width: 3rem;
+            height: 5rem;
+            width: 4.5rem;
         }
     `;
 
-    return <div className = "row mt-2">
+    return <div className = "row mt-2 ">
         <div className = "col-md-2 col-3 d-flex justify-content-center">
             <StyledImgContainer>
                 <StyledIndicator className ="rounded-circle bg-secondary text-info text-center">
@@ -56,7 +57,7 @@ const MessageBox = props => {
             </StyledImgContainer>
         </div>
         <div className = "col-md-10 col-9">
-            <div className = "row">
+            <div className = "row ">
                 <div className = "col-lg-12">
                     <h5> {props.title} </h5>
                     {/* <h5>¿Cual es tu nombre ?</h5> */}
