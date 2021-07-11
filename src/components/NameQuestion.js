@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const NameQuestion = props => {
     const [candidateName,setCandidateName] = useState({});
     const [answeredQuestion,setAnsweredQuestion] = useState("");
-
     const itemEls = useRef([]);
 
     useEffect(()=>{
@@ -23,8 +22,30 @@ const NameQuestion = props => {
         setAnsweredQuestion(e.target.id);
         setCandidateName({...candidateName,[e.target.name]:e.target.value});
     };
+    const findNumbers = names => {
+        let foundNum = 0;
+        Object.values(names).map(name=>{
+            if (!/^[a-zA-Z]*$/g.test(name)) {
+                foundNum ++;
+            }
+        });
+        return foundNum;
+    };
+    const validateName = () => {
+        let namesWithNumbers = findNumbers({...candidateName});
+        if (Object.keys(candidateName).length < 3 ) {
+            alert("Faltan datos");
+        }
+        else {
+            if(namesWithNumbers > 0 ) {
+                alert(`Se detectó un erorr en ${namesWithNumbers} campos`)
+            }else {
+                props.onSendAnswer(Object.values(candidateName).join(" "));
+            }
+        }
+    };
     
-    return <MessageBox onSubmit = {() => props.onSendAnswer(Object.values(candidateName).join(" "))}>
+    return <MessageBox onSubmit = {validateName} >
         <form>
             <div className = "row p-3">
                 <div className = "col-md-6">

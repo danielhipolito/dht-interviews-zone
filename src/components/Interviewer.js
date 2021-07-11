@@ -78,7 +78,7 @@ const Interviewer = () => {
                         ?   <div key = {idx}> 
                                 {result.question} 
                                 {   result.answer ? result.answer :''}
-                                {   showResults && idx == 3 ?  <AnswerBox >
+                                {   showResults && idx === 3 ?  <AnswerBox >
                                     <div className = "row d-flex justify-content-center flex-column">
                                         <span> Fecha de nacimiento: {sessionStorage.getItem('Fecha')} </span>
                                         <span> Correo electrónico: {sessionStorage.getItem('Correo')} </span>
