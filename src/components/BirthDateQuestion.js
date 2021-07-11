@@ -23,7 +23,7 @@ const BirthDateQuestion = props => {
                 }              
             });
         }
-    },[birthDate]);
+    },[birthDate, props]);
 
     const handleBirthDate = e => {
         setAnsweredQuestion(e.target.id);
@@ -40,7 +40,7 @@ const BirthDateQuestion = props => {
                 setBirthDate({...birthDate,"year":1997});
             }
             else {
-                props.onSendAnswer(birthDate);
+                props.onSendAnswer(Object.values(birthDate).join(" "))
             }
         }
     };
@@ -56,7 +56,7 @@ const BirthDateQuestion = props => {
                         disabled = {props.isAnswered} />    
                 </div>
                 <div className = "col-md-4">
-                    <select id="month" className="form-control" name="month" value = {birthDate.month}
+                    <select id="month" className="form-control" name = "month" value = {birthDate.month}
                         onChange = {handleBirthDate} value = {birthDate.month} disabled = {props.isAnswered} >
                         {months.map((month,idx) =><option value = {idx + 1 } key = {idx}>{month}</option>)}
                     </select>

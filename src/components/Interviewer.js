@@ -7,37 +7,58 @@ import AnswerBox from './AnswerBox';
 
 const Interviewer = () => {
     const [currentQuestion,setCurrentQuestion] = useState(0);
-    const [interviewResults,setInterviewResults] = useState ( [{question:< NameQuestion onSendAnswer = {nameData =>saveNameData(nameData)}/>},
-        {question:<BirthDateQuestion onSendAnswer = {(algo) =>console.error("llego esto", algo)}/>}
-        ,{question:<ContactQuestion onSendAnswer = {(algo) =>console.error("llego esto", algo)}/>}]);
-    
-    useEffect(()=> {
-    },[interviewResults]);
+    const [lastQuestion,setLastQuestion] = useState(0);
+    const [interviewResults,setInterviewResults] = useState ( [{question:< NameQuestion onSendAnswer = 
+        {name =>updateAnswer(name,0)}/>}, {question:<BirthDateQuestion onSendAnswer = 
+        {date =>updateAnswer(date,1)}/>} ,{question:<ContactQuestion onSendAnswer = 
+        {contact =>updateAnswer(contact,2)}/>}]);
 
-    const updateCurrentQuestion = questionNum => {
-        let candidateInfoCopia = interviewResults;
-        if(questionNum > currentQuestion) {
-            setCurrentQuestion(questionNum);
-        } else {
-            candidateInfoCopia[questionNum].question = < NameQuestion onSendAnswer = {nameData =>saveNameData(nameData)}
-            isAnswered = {false}/>;
-            setInterviewResults([...candidateInfoCopia]);
+    const handleInterview = () => {
+        if(currentQuestion > lastQuestion) {
+            setLastQuestion(currentQuestion);
         }
     };
-   
-    const saveNameData = nameData => {
-        let candidateInfoCopy = interviewResults;
-        updateCurrentQuestion(1);
-        candidateInfoCopy[0].answer = <AnswerBox answer = {nameData} onEditing = {()=>updateCurrentQuestion(0)}/>;
-        candidateInfoCopy[0].question = < NameQuestion onSendAnswer = {nameData =>saveNameData(nameData)}
-            isAnswered = {true}/>;
-        setInterviewResults(candidateInfoCopy);
+    
+    useEffect(()=> {
+        handleInterview();
+    },[currentQuestion]);
+
+    const updateQuestion = questionIdx => {
+        let candidateInfoCopia = interviewResults;
+        let isEnabled = false;
+        isEnabled = !candidateInfoCopia[questionIdx].enabled;
+        candidateInfoCopia[questionIdx].enabled = isEnabled;
+        switch(questionIdx) {
+            case 1:
+                candidateInfoCopia[questionIdx].question = <BirthDateQuestion 
+                    onSendAnswer = { date =>updateAnswer(date,1)} isAnswered = {isEnabled}/>;
+            break;
+            case 2:
+                candidateInfoCopia[questionIdx].question = <ContactQuestion 
+                onSendAnswer = { contact => updateAnswer(contact,2)} isAnswered = {isEnabled}/>;
+            break;
+            default:
+                candidateInfoCopia[questionIdx].question = < NameQuestion onSendAnswer = 
+                    {name =>updateAnswer(name,0)} isAnswered = {isEnabled}/>;
+            break;
+        }
+        setInterviewResults([...candidateInfoCopia]);
     };
+
+    const updateAnswer = (answer,answerIdx) => {
+        let candidateInfoCopia = interviewResults;
+        candidateInfoCopia[answerIdx].answer = <AnswerBox answer = {answer} onEditing = 
+            {()=>{updateQuestion(answerIdx);setCurrentQuestion(answerIdx)}}/>;
+        updateQuestion(answerIdx);
+        setInterviewResults([...candidateInfoCopia]);
+        setCurrentQuestion(answerIdx + 1);
+    };
+
     return <div>
         <ChatHeader/>
             <div className = "container">
                 {interviewResults.map ((result,idx) => {
-                    return idx <= currentQuestion 
+                    return idx <= lastQuestion
                         ?   <div key = {idx}> 
                                 {result.question} 
                                 {   result.answer ? result.answer :''}

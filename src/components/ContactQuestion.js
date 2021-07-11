@@ -40,7 +40,8 @@ const ContactQuestion = props => {
                 setContactData({...contactData,"phone":"525532211229"});
             }
             else {
-                props.onSendAnswer(contactData);
+                props.onSendAnswer(`Celular: ${contactData.phone}
+                Correo: ${contactData.email}`);
             }
         }
     };

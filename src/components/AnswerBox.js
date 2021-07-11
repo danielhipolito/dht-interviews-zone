@@ -2,6 +2,7 @@ import Card from './Card';
 import PropTypes from 'prop-types';
 
 const AnswerBox = props => {
+    
     return <div className = "row d-flex justify-content-end">
         <div className = "p-1 col-lg-5 col-md-7 col-11 runded-circle text-center">
             <Card customClass = "bg-primary p-2">
