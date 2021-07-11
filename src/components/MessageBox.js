@@ -60,20 +60,18 @@ const MessageBox = props => {
             <div className = "row">
                 <div className = "col-lg-12">
                     <h5> {props.title} </h5>
-                    {/* <h5>¿Cual es tu nombre ?</h5> */}
                 </div>
                 <div className = "col-lg-12  ">
                     <div className = "row">
                         <div className = "col-md-10">
                             <Card customClass = "bg-light">
                                 {props.children}
-                            
                             </Card>
                         </div>
                         <div className = {`col-md-2 d-flex align-items-center justify-content-md-center 
                             justify-content-end`}>
                             <button className = "btn btn-secondary" onClick = {props.onSubmit}>
-                                Enviar
+                                {props.onSubmitText}
                             </button>
                         </div>
                     </div>
@@ -85,7 +83,8 @@ const MessageBox = props => {
 MessageBox.defaultProps = {
     title: '¿Cual es tu nombre?',
     onSubmit: () => alert("¿Que se supone que tendría que hacer?"),
-    children: <input type = "text" placeholder = "Tu respuesta aqui"/>  
+    children: <input type = "text" placeholder = "Tu respuesta aqui"/>,
+    onSubmitText: 'Enviar'  
 };
   
 MessageBox.propTypes = {
@@ -94,7 +93,8 @@ MessageBox.propTypes = {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
     ]).isRequired,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func,
+    onSubmitText: PropTypes.string
 };
   
 
