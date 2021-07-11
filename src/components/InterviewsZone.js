@@ -1,7 +1,6 @@
 import NavBar from './NavBar';
 import Interviewer from './Interviewer';
 import Card from './Card';
-import styled from 'styled-components';
 
 const InterviewsZone = () => {
     return <div className = "container-fluid">

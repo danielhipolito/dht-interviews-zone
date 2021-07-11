@@ -26,21 +26,21 @@ const ContactQuestion = props => {
         setContactData({...contactData,[e.target.name]:e.target.value});
     };
     const handlePhone = phone => {
-        setContactData({...contactData,["phone"]:phone});
+        setContactData({...contactData,"phone":phone});
     };
     const validateContactData = () => {
         const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!emailRegEx.test(String(contactData.email).toLowerCase())) {
             alert("Email Invalido");
-            setContactData({...contactData,["email"]:"ejemplo@ejemplo.com"});
+            setContactData({...contactData,"email":"ejemplo@ejemplo.com"});
         }
         else {
             if(!contactData.phone || contactData.phone.length <= 8) {
                 alert("Celular invalido");
-                setContactData({...contactData,["phone"]:"525532211229"});
+                setContactData({...contactData,"phone":"525532211229"});
             }
             else {
-                props.onSendName(contactData);
+                props.onSendAnswer(contactData);
             }
         }
     };
@@ -80,12 +80,12 @@ const ContactQuestion = props => {
 
 ContactQuestion.defaultProps = {
     isAnswered: false,
-    onSendName: () => alert("No tengo función establecida")
+    onSendAnswer: () => alert("No tengo función establecida")
 };
 
 ContactQuestion.propTypes = {
     isAnswered: PropTypes.bool,
-    onSendName: PropTypes.func.isRequired
+    onSendAnswer: PropTypes.func.isRequired
 };
 
 export default ContactQuestion;

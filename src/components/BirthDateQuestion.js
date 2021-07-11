@@ -11,8 +11,8 @@ const BirthDateQuestion = props => {
     const months = moment.months();
     const dayMin = 1;
     const dayMax = 31;
-    const yearMin = 1;
-    const yearMax = 31;
+    const yearMin = 1960;
+    const yearMax = 2015;
 
     useEffect(()=>{
         if(answeredQuestion) {
@@ -32,15 +32,15 @@ const BirthDateQuestion = props => {
     const validateDate = () => {
         if(!birthDate.day || !( birthDate.day >= dayMin && birthDate.day <= dayMax)  ) {
             alert("dia invalido");
-            setBirthDate({...birthDate,["day"]:1});
+            setBirthDate({...birthDate,"day":1});
         }
         else {
             if(!birthDate.year || !( birthDate.year >= yearMin && birthDate.year <= yearMax)) {
                 alert("Año invalido");
-                setBirthDate({...birthDate,["year"]:1997});
+                setBirthDate({...birthDate,"year":1997});
             }
             else {
-                props.onSendName(birthDate);
+                props.onSendAnswer(birthDate);
             }
         }
     };
@@ -74,12 +74,12 @@ const BirthDateQuestion = props => {
 
 BirthDateQuestion.defaultProps = {
     isAnswered: false,
-    onSendName: () => alert("No tengo función establecida")
+    onSendAnswer: () => alert("No tengo función establecida")
 };
 
 BirthDateQuestion.propTypes = {
     isAnswered: PropTypes.bool,
-    onSendName: PropTypes.func.isRequired
+    onSendAnswer: PropTypes.func.isRequired
 };
 
 export default BirthDateQuestion;

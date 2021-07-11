@@ -24,7 +24,7 @@ const NameQuestion = props => {
         setCandidateName({...candidateName,[e.target.name]:e.target.value});
     };
     
-    return <MessageBox onSubmit = {() => props.onSendName(candidateName)}>
+    return <MessageBox onSubmit = {() => props.onSendAnswer(Object.values(candidateName).join(" "))}>
         <form>
             <div className = "row p-3">
                 <div className = "col-md-6">
@@ -58,12 +58,12 @@ const NameQuestion = props => {
 
 NameQuestion.defaultProps = {
     isAnswered: false,
-    onSendName: () => alert("No tengo función establecida")
+    onSendAnswer: () => alert("No tengo función establecida")
 };
 
 NameQuestion.propTypes = {
     isAnswered: PropTypes.bool,
-    onSendName: PropTypes.func.isRequired
+    onSendAnswer: PropTypes.func.isRequired
 };
 
 export default NameQuestion;

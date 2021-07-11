@@ -27,7 +27,7 @@ AnswerBox.defaultProps = {
 
 AnswerBox.propTypes = {
     answer: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onEditing: PropTypes.func.isRequired
 };
 
 
