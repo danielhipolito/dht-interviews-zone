@@ -1,17 +1,20 @@
 import {useState, useEffect} from 'react';
 import ChatHeader from './ChatHeader';
+import AnswerBox from './AnswerBox';
 import NameQuestion from './NameQuestion';
 import BirthDateQuestion from './BirthDateQuestion';
 import ContactQuestion from './ContactQuestion';
-import AnswerBox from './AnswerBox';
+import ConfirmationQuestion from './ConfirmationQuestion';
 
 const Interviewer = () => {
     const [currentQuestion,setCurrentQuestion] = useState(0);
     const [lastQuestion,setLastQuestion] = useState(0);
     const [interviewResults,setInterviewResults] = useState ( [{question:< NameQuestion onSendAnswer = 
         {name =>updateAnswer(name,0)}/>}, {question:<BirthDateQuestion onSendAnswer = 
-        {date =>updateAnswer(date,1)}/>} ,{question:<ContactQuestion onSendAnswer = 
-        {contact =>updateAnswer(contact,2)}/>}]);
+        {date =>updateAnswer(date,1)}/>},{question:<ContactQuestion onSendAnswer = 
+        {contact =>updateAnswer(contact,2)}/>},{question:<ConfirmationQuestion onSendAnswer = 
+        {() =>setShowResults(true)}/>}]);
+    const [showResults,setShowResults] = useState(false);
 
     const handleInterview = () => {
         if(currentQuestion > lastQuestion) {
@@ -38,19 +41,32 @@ const Interviewer = () => {
                 onSendAnswer = { contact => updateAnswer(contact,2)} isAnswered = {isEnabled}/>;
             break;
             default:
-                candidateInfoCopia[questionIdx].question = < NameQuestion onSendAnswer = 
+                candidateInfoCopia[questionIdx].question = <NameQuestion onSendAnswer = 
                     {name =>updateAnswer(name,0)} isAnswered = {isEnabled}/>;
             break;
         }
-        setInterviewResults([...candidateInfoCopia]);
+        setInterviewResults(candidateInfoCopia);
     };
 
     const updateAnswer = (answer,answerIdx) => {
         let candidateInfoCopia = interviewResults;
+   
         candidateInfoCopia[answerIdx].answer = <AnswerBox answer = {answer} onEditing = 
             {()=>{updateQuestion(answerIdx);setCurrentQuestion(answerIdx)}}/>;
+        switch(answerIdx) {
+            case 1:
+                sessionStorage.setItem("Fecha", answer);
+            break;
+            case 2:
+                sessionStorage.setItem("Celular", answer.split(":")[1].replace(/\D/g, ""));
+                sessionStorage.setItem("Correo", answer.split(":")[2]);
+            break;
+            default:
+                sessionStorage.setItem("Nombre", answer);
+            break;
+        }
         updateQuestion(answerIdx);
-        setInterviewResults([...candidateInfoCopia]);
+        setInterviewResults(candidateInfoCopia);
         setCurrentQuestion(answerIdx + 1);
     };
 
@@ -62,6 +78,14 @@ const Interviewer = () => {
                         ?   <div key = {idx}> 
                                 {result.question} 
                                 {   result.answer ? result.answer :''}
+                                {   showResults && idx == 3 ?  <AnswerBox >
+                                    <div className = "row d-flex justify-content-center flex-column">
+                                        <span> Fecha de nacimiento: {sessionStorage.getItem('Fecha')} </span>
+                                        <span> Correo electrónico: {sessionStorage.getItem('Correo')} </span>
+                                        <span> Teléfono celular: {sessionStorage.getItem('Celular')} </span>
+                                        <span> Nombre: {sessionStorage.getItem('Nombre')} </span>
+                                    </div>
+                                </AnswerBox> :''}
                             </div>
                         :   ' '
                 })}

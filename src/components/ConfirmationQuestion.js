@@ -5,7 +5,7 @@ const ConfirmationQuestion = props => {
     return <MessageBox onSubmit = {() => props.onSendAnswer()} title = ""
         onSubmitText = "Iniciar">
             <div className = "row p-3">
-                <p className = "pl-3">Si tus datos son correctos por favor iniciemos</p>
+                <p className = "pl-3">Si tus datos son correctos por favor continuemos</p>
             </div>
     </MessageBox>;
 };
