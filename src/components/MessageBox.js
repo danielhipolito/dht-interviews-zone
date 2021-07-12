@@ -64,9 +64,7 @@ const MessageBox = props => {
                 <div className = "col-lg-12  ">
                     <div className = "row">
                         <div className = "col-md-10">
-                            <Card customClass = "bg-light">
-                                {props.children}
-                            </Card>
+                            {props.children}
                         </div>
                         <div className = {`col-md-2 d-flex align-items-center justify-content-md-center 
                             justify-content-end`}>
