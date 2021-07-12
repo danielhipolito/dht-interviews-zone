@@ -6,23 +6,14 @@ import PropTypes from 'prop-types';
 
 const BirthDateQuestion = props => {
     const [birthDate,setBirthDate] = useState({day:25,month:12,year:1997});
-    const [answeredQuestion,setAnsweredQuestion] = useState("");
     const months = moment.months();
     const dayMin = 1;
     const dayMax = 31;
     const yearMin = 1960;
     const yearMax = 2015;
 
-    useEffect(()=>{
-        if(answeredQuestion) {
-            document.getElementById(answeredQuestion).focus();
-        }
-    },[birthDate, props]);
-
     const handleBirthDate = e => {
-        setAnsweredQuestion(e.target.id);
         setBirthDate({...birthDate,[e.target.name]:e.target.value});
-
     };
     const validateDate = () => {
         if(!birthDate.day || !( birthDate.day >= dayMin && birthDate.day <= dayMax)  ) {

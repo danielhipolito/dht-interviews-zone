@@ -4,16 +4,8 @@ import PropTypes from 'prop-types';
 
 const NameQuestion = props => {
     const [candidateName,setCandidateName] = useState({});
-    const [answeredQuestion,setAnsweredQuestion] = useState("");
-
-    useEffect(()=>{
-        if(answeredQuestion) {
-            document.getElementById(answeredQuestion).focus();
-        }
-    },[candidateName]);
 
     const handleCandidateName = e => {
-        setAnsweredQuestion(e.target.id);
         setCandidateName({...candidateName,[e.target.name]:e.target.value});
     };
     const findNumbers = names => {

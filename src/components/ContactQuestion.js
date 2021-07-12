@@ -7,16 +7,8 @@ import PropTypes from 'prop-types';
 
 const ContactQuestion = props => {
     const [contactData,setContactData] = useState({});
-    const [answeredQuestion,setAnsweredQuestion] = useState("");
-
-    useEffect(()=>{
-        if(answeredQuestion) {
-            document.getElementById(answeredQuestion).focus();
-        }
-    },[contactData]);
 
     const handleContactData = e => {
-        setAnsweredQuestion(e.target.id);
         setContactData({...contactData,[e.target.name]:e.target.value});
     };
     const handlePhone = phone => {
