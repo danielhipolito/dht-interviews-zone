@@ -1,20 +1,14 @@
 import MessageBox from './MessageBox';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 const NameQuestion = props => {
     const [candidateName,setCandidateName] = useState({});
     const [answeredQuestion,setAnsweredQuestion] = useState("");
-    const itemEls = useRef([]);
 
     useEffect(()=>{
         if(answeredQuestion) {
-            itemEls.current.forEach(itemEl=> {
-                if(itemEl) {
-                    if(itemEl.id.includes(answeredQuestion))
-                        itemEl.focus();
-                }              
-            });
+            document.getElementById(answeredQuestion).focus();
         }
     },[candidateName]);
 
@@ -51,25 +45,21 @@ const NameQuestion = props => {
                 <div className = "col-md-6">
                     <input placeholder = "Primer Nombre" className = "form-control"  id="firstName" 
                         type = "text" onChange = {handleCandidateName} name = "firstName" 
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
                         value = {candidateName.firstName} disabled = {props.isAnswered}/>    
                 </div>
                 <div className = "col-md-6 mb-2">
                     <input placeholder = "Segundo Nombre" className = "form-control" id="secondName"
                         type = "text" onChange = {handleCandidateName} name = "secondName"
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
                         value = {candidateName.secondName} disabled = {props.isAnswered}/>
                 </div>
                 <div className = "col-md-6">
                     <input placeholder = "Apellido Paterno" className = "form-control" type = "text"
                         id = "fathersLastName" onChange = {handleCandidateName} name = "fathersLastName"
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
                         value = {candidateName.fathersLastName} disabled = {props.isAnswered}/>
                 </div>
                 <div className = "col-md-6">
                     <input placeholder = "Apellido Materno" className = "form-control" type = "text"
                         id = "mothersLastName" onChange = {handleCandidateName} name = "mothersLastName" 
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
                         value = {candidateName.mothersLastName} disabled = {props.isAnswered}/>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import MessageBox from './MessageBox';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import 'moment/locale/es';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -8,16 +8,10 @@ import PropTypes from 'prop-types';
 const ContactQuestion = props => {
     const [contactData,setContactData] = useState({});
     const [answeredQuestion,setAnsweredQuestion] = useState("");
-    const itemEls = useRef([]);
 
     useEffect(()=>{
         if(answeredQuestion) {
-            itemEls.current.forEach(itemEl=> {
-                if(itemEl) {
-                    if(itemEl.id.includes(answeredQuestion))
-                        itemEl.focus();
-                }              
-            });
+            document.getElementById(answeredQuestion).focus();
         }
     },[contactData]);
 
@@ -53,7 +47,6 @@ const ContactQuestion = props => {
                 <div className = "col-md-6">
                     <input placeholder = "Correo electrónico" className = "form-control" type = "email"
                         id = "email" onChange = {handleContactData} name = "email"
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) }
                         value = {contactData.email} disabled = {props.isAnswered}/>
                 </div>
                 <div className = "col-md-6">
@@ -66,7 +59,6 @@ const ContactQuestion = props => {
                         inputProps={{
                             id: "phone",
                             name: 'phone',
-                            autoFocus: true,
                             required: true
                             }}
                         preferredCountries = {["us","mx","pt"]}

@@ -1,5 +1,5 @@
 import MessageBox from './MessageBox';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import PropTypes from 'prop-types';
@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 const BirthDateQuestion = props => {
     const [birthDate,setBirthDate] = useState({day:25,month:12,year:1997});
     const [answeredQuestion,setAnsweredQuestion] = useState("");
-    const itemEls = useRef([]);
     const months = moment.months();
     const dayMin = 1;
     const dayMax = 31;
@@ -16,18 +15,14 @@ const BirthDateQuestion = props => {
 
     useEffect(()=>{
         if(answeredQuestion) {
-            itemEls.current.forEach(itemEl=> {
-                if(itemEl) {
-                    if(itemEl.id.includes(answeredQuestion))
-                        itemEl.focus();
-                }              
-            });
+            document.getElementById(answeredQuestion).focus();
         }
     },[birthDate, props]);
 
     const handleBirthDate = e => {
         setAnsweredQuestion(e.target.id);
         setBirthDate({...birthDate,[e.target.name]:e.target.value});
+
     };
     const validateDate = () => {
         if(!birthDate.day || !( birthDate.day >= dayMin && birthDate.day <= dayMax)  ) {
@@ -52,7 +47,7 @@ const BirthDateQuestion = props => {
                 <div className = "col-md-4">
                     <input placeholder = "Dia" className = "form-control"  id = "day" type = "number"
                         onChange = {handleBirthDate} name = "day" value = {birthDate.day} min = {dayMin}
-                        ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl])} max = {dayMax}
+                        max = {dayMax}
                         disabled = {props.isAnswered} />    
                 </div>
                 <div className = "col-md-4">
@@ -64,7 +59,7 @@ const BirthDateQuestion = props => {
                 <div className = "col-md-4">
                     <input placeholder = "Año" className = "form-control" id = "year" type = "number"
                     onChange = {handleBirthDate} name = "year" value = {birthDate.year} min = {yearMin}
-                    ref = {itemEl => (itemEls.current = [...itemEls.current, itemEl]) } max = {yearMax}
+                     max = {yearMax}
                     disabled = {props.isAnswered} /> 
                 </div>
             </div>
